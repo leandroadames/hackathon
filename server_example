@@ -1,0 +1,32 @@
+// set up dependencies
+const express = require('express');
+const app = express();
+
+// handle request with routes
+app.get('/hello', function(request, response){
+    response.send('hi there!')
+})
+//hadles a goodbye path
+app.get('/goodbye', function(request,response){
+    0
+})
+
+
+// listen on port
+app.listen(3000, function(){
+    console.log('server is runing');
+})
+
+
+
+
+function routeWithNext (req, res, next) {
+  console.log('I will log out to the terminal but am not going to respond.')
+  next()
+}
+
+function routeThatResponds (req, res, next) {
+  res.send('I am responding. The request-response cycle is now finished')
+}
+
+app.get('/try-next', routeWithNext, routeThatResponds)
